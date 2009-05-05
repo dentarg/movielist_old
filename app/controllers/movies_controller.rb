@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @seen_movie.save
         flash[:notice] = "#{@movie.name} added to your seen list."
-        format.html { redirect_to :controller => 'seen_movies', :action => 'index' }
+        format.html { redirect_to(user_seen_movies_path(current_user)) }
       else # FIXME
         format.html { render :action => "new" }
       end
@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @to_watch_movie.save
         flash[:notice] = "#{@movie.name} added to your to watch list."
-        format.html { redirect_to :controller => 'to_watch_movies', :action => 'index' }
+        format.html { redirect_to(user_to_watch_movies_path(current_user)) }
       else # FIXME
         format.html { render :action => "new" }
       end
@@ -43,7 +43,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @favorite_movie.save
         flash[:notice] = "#{@movie.name} added to your favorite list."
-        format.html { redirect_to :controller => 'favorite_movies', :action => 'index' }
+        format.html { redirect_to(user_favorite_movies_path(current_user)) }
       else # FIXME
         format.html { render :action => "new" }
       end

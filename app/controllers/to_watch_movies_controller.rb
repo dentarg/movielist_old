@@ -2,7 +2,8 @@ class ToWatchMoviesController < ApplicationController
   # GET /to_watch_movies
   # GET /to_watch_movies.xml
   def index
-    @to_watch_movies = ToWatchMovie.find(:all)
+    @user             = User.find(params[:user_id])
+    @to_watch_movies  = @user.to_watch_movies
 
     respond_to do |format|
       format.html # index.html.erb
