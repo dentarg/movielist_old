@@ -1,4 +1,55 @@
 class MoviesController < ApplicationController
+  before_filter :login_required
+
+
+  def seen
+    @movie            = Movie.find(params[:id])
+    @seen_movie       = SeenMovie.new
+    @seen_movie.movie = @movie
+    @seen_movie.user  = current_user
+
+    respond_to do |format|
+      if @seen_movie.save
+        flash[:notice] = "#{@movie.name} added to your seen list."
+        format.html { redirect_to :controller => 'seen_movies', :action => 'index' }
+      else # FIXME
+        format.html { render :action => "new" }
+      end
+    end
+  end
+  
+  def to_watch
+    @movie                = Movie.find(params[:id])
+    @to_watch_movie       = ToWatchMovie.new
+    @to_watch_movie.movie = @movie
+    @to_watch_movie.user  = current_user
+
+    respond_to do |format|
+      if @to_watch_movie.save
+        flash[:notice] = "#{@movie.name} added to your to watch list."
+        format.html { redirect_to :controller => 'to_watch_movies', :action => 'index' }
+      else # FIXME
+        format.html { render :action => "new" }
+      end
+    end
+  end  
+
+  def favorite
+    @movie                = Movie.find(params[:id])
+    @favorite_movie       = FavoriteMovie.new
+    @favorite_movie.movie = @movie
+    @favorite_movie.user  = current_user
+
+    respond_to do |format|
+      if @favorite_movie.save
+        flash[:notice] = "#{@movie.name} added to your favorite list."
+        format.html { redirect_to :controller => 'favorite_movies', :action => 'index' }
+      else # FIXME
+        format.html { render :action => "new" }
+      end
+    end
+  end
+
   # GET /movies
   # GET /movies.xml
   def index

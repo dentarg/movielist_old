@@ -4,22 +4,19 @@
   <tr>
     <th>Name</th>
     <th>Year</th>
-    <th>Imdb</th>
-    <th>Imdb url</th>
-    <th>Imdb grade</th>
-    <th>Dn url</th>
-    <th>Dn grade</th>
+    <th>Seen</th>
+    <th>To Watch</th>
+    <th>Favorite</th>
   </tr>
 
 <% for movie in @movies %>
   <tr>
     <td><%=h movie.name %></td>
     <td><%=h movie.year %></td>
-    <td><%=h movie.imdb_id %></td>
-    <td><%=h movie.imdb_url %></td>
-    <td><%=h movie.imdb_grade %></td>
-    <td><%=h movie.dn_url %></td>
-    <td><%=h movie.dn_grade %></td>
+    <td><%= link_to 'Seen',     seen_movie_path(movie),     :method => :post %></td>
+    <td><%= link_to 'To watch', to_watch_movie_path(movie), :method => :post %></td>
+    <td><%= link_to 'Favorite', favorite_movie_path(movie), :method => :post %></td>
+
     <td><%= link_to 'Show', movie %></td>
     <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
     <td><%= link_to 'Destroy', movie, :confirm => 'Are you sure?', :method => :delete %></td>
