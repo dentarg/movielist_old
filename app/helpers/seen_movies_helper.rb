@@ -1,0 +1,2 @@
+module SeenMoviesHelper
+end

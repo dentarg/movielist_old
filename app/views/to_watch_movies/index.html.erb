@@ -1,0 +1,22 @@
+<h1>Listing to_watch_movies</h1>
+
+<table>
+  <tr>
+    <th>Movie</th>
+    <th>User</th>
+  </tr>
+
+<% for to_watch_movie in @to_watch_movies %>
+  <tr>
+    <td><%=h to_watch_movie.movie_id %></td>
+    <td><%=h to_watch_movie.user_id %></td>
+    <td><%= link_to 'Show', to_watch_movie %></td>
+    <td><%= link_to 'Edit', edit_to_watch_movie_path(to_watch_movie) %></td>
+    <td><%= link_to 'Destroy', to_watch_movie, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New to_watch_movie', new_to_watch_movie_path %>

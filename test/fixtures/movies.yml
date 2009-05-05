@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  year: MyString
+  imdb_id: MyString
+  imdb_url: MyString
+  imdb_grade: 1
+  dn_url: MyString
+  dn_grade: 1
+
+two:
+  name: MyString
+  year: MyString
+  imdb_id: MyString
+  imdb_url: MyString
+  imdb_grade: 1
+  dn_url: MyString
+  dn_grade: 1

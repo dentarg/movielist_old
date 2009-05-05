@@ -1,0 +1,13 @@
+<p>
+  <b>Movie:</b>
+  <%=h @to_watch_movie.movie_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @to_watch_movie.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_to_watch_movie_path(@to_watch_movie) %> |
+<%= link_to 'Back', to_watch_movies_path %>

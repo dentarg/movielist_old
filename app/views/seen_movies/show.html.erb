@@ -1,0 +1,18 @@
+<p>
+  <b>Movie:</b>
+  <%=h @seen_movie.movie_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @seen_movie.user_id %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%=h @seen_movie.count %>
+</p>
+
+
+<%= link_to 'Edit', edit_seen_movie_path(@seen_movie) %> |
+<%= link_to 'Back', seen_movies_path %>

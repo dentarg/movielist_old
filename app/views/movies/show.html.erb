@@ -1,0 +1,38 @@
+<p>
+  <b>Name:</b>
+  <%=h @movie.name %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%=h @movie.year %>
+</p>
+
+<p>
+  <b>Imdb:</b>
+  <%=h @movie.imdb_id %>
+</p>
+
+<p>
+  <b>Imdb url:</b>
+  <%=h @movie.imdb_url %>
+</p>
+
+<p>
+  <b>Imdb grade:</b>
+  <%=h @movie.imdb_grade %>
+</p>
+
+<p>
+  <b>Dn url:</b>
+  <%=h @movie.dn_url %>
+</p>
+
+<p>
+  <b>Dn grade:</b>
+  <%=h @movie.dn_grade %>
+</p>
+
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>

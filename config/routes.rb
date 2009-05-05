@@ -1,4 +1,12 @@
-ActionController::Routing::Routes.draw do |map| 
+ActionController::Routing::Routes.draw do |map|
+  map.resources :favorite_movies
+
+  map.resources :movies
+
+  map.resources :seen_movies
+
+  map.resources :to_watch_movies
+ 
   # Restful Authentication Rewrites
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

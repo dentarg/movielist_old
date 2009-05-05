@@ -1,0 +1,39 @@
+<h1>New movie</h1>
+
+<% form_for(@movie) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.label :imdb_id %><br />
+    <%= f.text_field :imdb_id %>
+  </p>
+  <p>
+    <%= f.label :imdb_url %><br />
+    <%= f.text_field :imdb_url %>
+  </p>
+  <p>
+    <%= f.label :imdb_grade %><br />
+    <%= f.text_field :imdb_grade %>
+  </p>
+  <p>
+    <%= f.label :dn_url %><br />
+    <%= f.text_field :dn_url %>
+  </p>
+  <p>
+    <%= f.label :dn_grade %><br />
+    <%= f.text_field :dn_grade %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', movies_path %>

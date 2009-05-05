@@ -1,0 +1,24 @@
+<h1>Listing seen_movies</h1>
+
+<table>
+  <tr>
+    <th>Movie</th>
+    <th>User</th>
+    <th>Count</th>
+  </tr>
+
+<% for seen_movie in @seen_movies %>
+  <tr>
+    <td><%=h seen_movie.movie_id %></td>
+    <td><%=h seen_movie.user_id %></td>
+    <td><%=h seen_movie.count %></td>
+    <td><%= link_to 'Show', seen_movie %></td>
+    <td><%= link_to 'Edit', edit_seen_movie_path(seen_movie) %></td>
+    <td><%= link_to 'Destroy', seen_movie, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New seen_movie', new_seen_movie_path %>
