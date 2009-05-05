@@ -1,0 +1,7 @@
+log/development.log
+db/*.sqlite3
+public/avatars
+config/database.yml
+.DS_Store
+.project
+.tmp*
