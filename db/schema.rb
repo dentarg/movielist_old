@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090523130338) do
+ActiveRecord::Schema.define(:version => 20090523191401) do
 
   create_table "favorite_movies", :force => true do |t|
     t.integer  "movie_id"
@@ -19,17 +19,19 @@ ActiveRecord::Schema.define(:version => 20090523130338) do
   end
 
   create_table "movies", :force => true do |t|
-    t.string   "name"
+    t.string   "title"
     t.string   "year"
     t.string   "imdb_id"
-    t.integer  "imdb_grade"
     t.string   "dn_url"
     t.integer  "dn_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name_sv"
+    t.string   "title_sv"
     t.integer  "created_by"
     t.integer  "updated_by"
+    t.string   "imdb_url"
+    t.string   "imdb_rating"
+    t.datetime "imdb_update_at"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|

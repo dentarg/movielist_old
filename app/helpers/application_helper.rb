@@ -3,10 +3,10 @@ module ApplicationHelper
   # Sets the page title and outputs title if container is passed in.
   # eg. <%= title('Hello World', :h2) %> will return the following:
   # <h2>Hello World</h2> as well as setting the page title.
-  def title(str, container = nil)
+  def title(str)
     @page_title = str
-    content_tag(container, str) if container
-  end
+    content_tag(:h1, str)
+  end  
   
   # Outputs the corresponding flash message if any are set
   def flash_messages

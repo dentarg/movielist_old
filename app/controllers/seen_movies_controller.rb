@@ -2,8 +2,8 @@ class SeenMoviesController < ApplicationController
   # GET /seen_movies
   # GET /seen_movies.xml
   def index
-    @user         = User.find(params[:user_id])
-    @seen_movies  = @user.seen_movies
+    @user   = User.find(params[:user_id])
+    @movies = @user.seen_movies
 
     respond_to do |format|
       format.html # index.html.erb

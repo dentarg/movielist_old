@@ -1,38 +1,13 @@
-<p>
-  <b>Name:</b>
-  <%=h @movie.name %>
-</p>
+<%= title 'Movie' %>
 
-<p>
-  <b>Year:</b>
-  <%=h @movie.year %>
-</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Year</th>
+    <th>IMDB</th>
+    <th>DN</th>
+  </tr>
 
-<p>
-  <b>Imdb:</b>
-  <%=h @movie.imdb_id %>
-</p>
+<%= render :partial => 'show', :locals => { :movie => @movie } %>
 
-<p>
-  <b>Imdb url:</b>
-  <%=h @movie.imdb_url %>
-</p>
-
-<p>
-  <b>Imdb grade:</b>
-  <%=h @movie.imdb_grade %>
-</p>
-
-<p>
-  <b>Dn url:</b>
-  <%=h @movie.dn_url %>
-</p>
-
-<p>
-  <b>Dn grade:</b>
-  <%=h @movie.dn_grade %>
-</p>
-
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+</table>

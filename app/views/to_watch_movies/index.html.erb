@@ -1,18 +1,5 @@
-<h1>Listing your to_watch_movies</h1>
+<%= title 'Movies you want to watch' %>
 
-<table>
-  <tr>
-    <th>Movie</th>
-    <th>User</th>
-  </tr>
-
-<% for to_watch_movie in @to_watch_movies %>
-  <tr>
-    <td><%=h to_watch_movie.movie_id %></td>
-    <td><%=h to_watch_movie.user_id %></td>
-    <td><%= link_to 'Show', to_watch_movie %></td>
-    <td><%= link_to 'Edit', edit_to_watch_movie_path(to_watch_movie) %></td>
-    <td><%= link_to 'Destroy', to_watch_movie, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'movies/top' %>
+<%= render :partial => 'movies/show', :collection => @movies, :as => :movie %>
+<%= render :partial => 'movies/bottom' %>

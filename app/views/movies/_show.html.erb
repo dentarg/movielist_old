@@ -1,0 +1,34 @@
+<tr>
+  <td><%= link_to movie.title, movie_path(movie) %></td>
+  <td><%= movie.year %></td>
+  <td>
+    <% if movie.imdb_rating %>
+      <%= link_to movie.imdb_rating, "http://www.imdb.com/title/#{movie.imdb_id}/" %>
+    <% end %>
+  </td>
+  <td>
+    <% if movie.dn_grade %>
+      <%= link_to movie.dn_grade, movie.dn_url %>
+    <% end %>
+  </td>
+  <% if logged_in? %>
+    <td>
+      <% if not movie.seen?(current_user) %>
+        <%= link_to 'Seen', seen_movie_path(movie), :method => :post %>
+      <% end %>
+    </td>
+    <td>
+      <% if not movie.to_watch?(current_user) %>
+        <%= link_to 'To watch', to_watch_movie_path(movie), :method => :post %>
+      <% end %>
+    </td>
+    <td>
+      <% if not movie.favorite?(current_user) %>
+        <%= link_to 'Favorite', favorite_movie_path(movie), :method => :post %>
+      <% end %>
+    </td>
+    
+    <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+    <td><%= link_to 'Destroy', movie, :confirm => 'Are you sure?', :method => :delete %></td>
+  <% end %>
+</tr>

@@ -52,6 +52,33 @@ class User < ActiveRecord::Base
   def password_required?
     new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
   end
+  
+  # Get Movie objects for seen movies
+  def movies_seen
+    movies = []
+    self.seen_movies.each do |seen|
+      movies << seen.movie
+    end
+    return movies
+  end
+
+  # Get Movie objects for favorite movies
+  def movies_favorite
+    movies = []
+    self.favorite_movies.each do |favorite|
+      movies << favorite.movie
+    end
+    return movies
+  end
+
+  # Get Movie objects for movies to watch
+  def movies_to_watch
+    movies = []
+    self.to_watch_movies.each do |to_watch|
+      movies << to_watch.movie
+    end
+    return movies
+  end
 
   protected
     

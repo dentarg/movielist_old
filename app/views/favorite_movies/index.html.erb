@@ -1,18 +1,5 @@
-<h1>Listing your favorite_movies</h1>
+<%= title 'Your favorite movies' %>
 
-<table>
-  <tr>
-    <th>Movie</th>
-    <th>User</th>
-  </tr>
-
-<% for favorite_movie in @favorite_movies %>
-  <tr>
-    <td><%=h favorite_movie.movie_id %></td>
-    <td><%=h favorite_movie.user_id %></td>
-    <td><%= link_to 'Show', favorite_movie %></td>
-    <td><%= link_to 'Edit', edit_favorite_movie_path(favorite_movie) %></td>
-    <td><%= link_to 'Destroy', favorite_movie, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'movies/top' %>
+<%= render :partial => 'movies/show', :collection => @movies, :as => :movie %>
+<%= render :partial => 'movies/bottom' %>

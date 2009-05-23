@@ -1,18 +1,5 @@
-<h1>Listing your seen_movies</h1>
+<%= title 'Movies you have seen' %>
 
-<table>
-  <tr>
-    <th>Movie</th>
-    <th>User</th>
-  </tr>
-
-<% for seen_movie in @seen_movies %>
-  <tr>
-    <td><%=h seen_movie.movie_id %></td>
-    <td><%=h seen_movie.user_id %></td>
-    <td><%= link_to 'Show', seen_movie %></td>
-    <td><%= link_to 'Edit', edit_seen_movie_path(seen_movie) %></td>
-    <td><%= link_to 'Destroy', seen_movie, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'movies/top' %>
+<%= render :partial => 'movies/show', :collection => @movies, :as => :movie %>
+<%= render :partial => 'movies/bottom' %>

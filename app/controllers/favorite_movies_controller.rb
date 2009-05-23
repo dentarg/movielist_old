@@ -2,8 +2,8 @@ class FavoriteMoviesController < ApplicationController
   # GET /favorite_movies
   # GET /favorite_movies.xml
   def index
-    @user             = User.find(params[:user_id])
-    @favorite_movies  = @user.favorite_movies
+    @user   = User.find(params[:user_id])
+    @movies = @user.favorite_movies
 
     respond_to do |format|
       format.html # index.html.erb

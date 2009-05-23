@@ -2,7 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 	<head>
-		<title><%= @page_title || APP_CONFIG[:site_name] %></title>
+		<title><%= @page_title ? "#{@page_title} - #{APP_CONFIG[:site_name]}" : APP_CONFIG[:site_name] %></title>
 		<meta http-equiv="content-type" content="text/xhtml; charset=utf-8" />
 		<meta http-equiv="imagetoolbar" content="no" />
 		<meta name="distribution" content="all" />
@@ -23,7 +23,7 @@
 <!-- Header -->
     	<div class="span-24">
     	  <div class="span-16">
-    	    <h1>movielist</h1>
+    	    <h1><%= link_to "movielist", root_path %></h1>
     	  </div>
     	  <div class="span-8 last" style="text-align: right;">
     		  <% if logged_in? %>
@@ -39,7 +39,7 @@
     	  <div class="span-24">
           <div id="navcontainer">
             <ul id="navlist">
-              <% if logged_in? %><li><%= link_to "Add movie", '' %></li><% end %>
+              <% if logged_in? %><li><%= link_to "Add movie", new_movie_path %></li><% end %>
               <li><%= link_to 'Browse movies', movies_path %></li>
               <li><%= link_to "Movie night", '' %></li>
   					  <% if logged_in? %><li><%= link_to 'Logout', logout_path %></li><% end %>
@@ -54,7 +54,7 @@
                 <li>Your movies:</li>
     					  <li><%= link_to 'Seen',       user_seen_movies_path(current_user) %></li>
     					  <li><%= link_to 'To watch',   user_to_watch_movies_path(current_user) %></li>
-    					  <li><%= link_to 'Favorites',  user_favorite_movies_path(current_user) %></li>	  
+    					  <li><%= link_to 'Favorites',  user_favorite_movies_path(current_user) %></li>
               </ul>
             </div>
     	    </div>
@@ -64,14 +64,11 @@
     	  <div class="span-24">
 			    <%= flash_messages %>
 			  </div>
-			  <div class="span-16">			  
-			    <%= yield :layout %>
-			  </div>
-			  <div class="span-16 last">
-			    tut
+			  <div class="span-24">			  
+			    <%= yield %>
 			  </div>
     	</div>
-<!-- Footer -->
+<!-- Footer
     	<div class="span-24 last">
     		<div class="span-8">
     			Box1
@@ -83,6 +80,7 @@
     			Box3
     		</div>
     	</div>	
+-->
     </div>
 	</body>
 </html>

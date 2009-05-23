@@ -1,6 +1,5 @@
 class MoviesController < ApplicationController
-  before_filter :login_required
-
+  before_filter :login_required, :except => [:index, :show]
 
   def seen
     @movie            = Movie.find(params[:id])
@@ -92,6 +91,14 @@ class MoviesController < ApplicationController
   # POST /movies.xml
   def create
     @movie = Movie.new(params[:movie])
+    if @imdb_url = params[:movie][:imdb_url]
+      imdb = IMDB.new(@imdb_url)
+      @movie.title          = imdb.title
+      @movie.year           = imdb.year
+      @movie.imdb_id        = @imdb_url.match(Movie.imdb_url_regexp).to_a[3]
+      @movie.imdb_rating    = imdb.rating
+      @movie.imdb_update_at = Time.now
+    end
 
     respond_to do |format|
       if @movie.save
