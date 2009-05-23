@@ -1,20 +1,23 @@
 <% unless logged_in? %>
-  <%= title "Login" %>
+  <%= title "log in" %>
   
   <% form_tag session_path do %>
 
-    <%= label_tag 'login', 'Username' %><br />
-    <%= text_field_tag 'login', @login, :class => "text" %><br />
+    <p><%= label_tag 'login', 'username' %></p>
+    <p><%= text_field_tag 'login', @login, :class => "text" %></p>
     
-    <%= label_tag 'password' %><br />
-    <%= password_field_tag 'password', nil, :class => "text" %><br />
+    <p><%= label_tag 'password', 'password' %></p>
+    <p><%= password_field_tag 'password', nil, :class => "text" %></p>
     
-    <%= label_tag 'remember_me', 'Remember me' %>
-    <%= check_box_tag 'remember_me', '1', @remember_me %>
+    <p>
+      <%= label_tag 'remember_me', 'remember me' %>
+      <%= check_box_tag 'remember_me', '1', @remember_me %>
+    </p>
     
-    <div class="buttons">
-    	<%= submit_tag 'Login' %>
-    	<%= link_to 'Forgotten Password', forgot_password_path %>
-    </div>
+  	<p>
+  	  <%= submit_tag 'Log in' %>
+    </p>
   <% end -%>
 <% end %>
+
+<p style="margin-top: 10px;"><%= link_to 'Forgot Your Password?', forgot_password_path %></p>

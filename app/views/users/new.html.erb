@@ -1,26 +1,22 @@
 <% @user.password = @user.password_confirmation = nil %>
-<%= title "Signup" %>
+
+<%= title "sign up" %>
+
 <% form_for @user do |f| %>
 	<%= f.error_messages %>
-		<ol>
-			<li>
-				<%= f.label :login, 'Username' %>
-				<%= f.text_field :login %>
-			</li>
-			<li>
-				<%= f.label :email %>
-				<%= f.text_field :email %>
-			</li>
-			<li>
-				<%= f.label :password %>
-				<%= f.password_field :password %>
-			</li>
-			<li>
-				<%= f.label :password_confirmation, 'Confirm Password' %>
-				<%= f.password_field :password_confirmation %>
-			</li>
-		</ol>
-	<div class="buttons">
+				
+		<p><%= f.label :login, 'username' %></p>
+		<p><%= f.text_field :login, :class => "text" %></p>
+			
+		<p><%= f.label :email, 'email' %></p>
+		<p><%= f.text_field :email, :class => "text" %></p>
+
+		<p><%= f.label :password, 'password' %></p>
+		<p><%= f.password_field :password, :class => "text" %></p>
+
+		<p><%= f.label :password_confirmation, 'confirm password' %></p>
+		<p><%= f.password_field :password_confirmation, :class => "text"%></p>
+
 		<%= submit_tag 'Sign up' %>
-	</div>
+
 <% end %>

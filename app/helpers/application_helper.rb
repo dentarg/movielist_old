@@ -5,8 +5,19 @@ module ApplicationHelper
   # <h2>Hello World</h2> as well as setting the page title.
   def title(str)
     @page_title = str
-    content_tag(:h1, str)
+    content_tag :h1, :class => "hide" do 
+      str
+    end
   end  
+  
+  # Adds an CSS class named 'active', if it's the active link
+  # Will not be able to handle blocks, like link_to 
+  def link_to_with_class(*args)
+    options = args.second || {}
+    url = url_for(options)
+    extra_args = {:id => (current_page?(url) ? 'current' : '' )}
+    link_to(*args << extra_args)
+  end
   
   # Outputs the corresponding flash message if any are set
   def flash_messages

@@ -1,0 +1,19 @@
+<h1>New favorite_movie</h1>
+
+<% form_for(@favorite_movie) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :movie_id %><br />
+    <%= f.text_field :movie_id %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', favorite_movies_path %>

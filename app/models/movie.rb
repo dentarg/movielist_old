@@ -13,15 +13,15 @@ class Movie < ActiveRecord::Base
   end
 
   def seen?(user)
-    user.movies_seen.include?(self)
+    user.seen_movies.include?(self)
   end
   
   def favorite?(user)
-    user.movies_favorite.include?(self)
+    user.favorite_movies.include?(self)
   end
   
-  def to_watch?(user)
-    user.movies_to_watch.include?(self)
+  def towatch?(user)
+    user.towatch_movies.include?(self)
   end
 
 end

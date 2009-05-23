@@ -12,7 +12,7 @@
 		<%#= stylesheet_link_tag 'base' %>
 		<%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
 		<%= stylesheet_link_tag 'blueprint/print', :media => "print" %>
-		<%= stylesheet_link_tag 'menu' %>
+		<%= stylesheet_link_tag 'my' %>
     <!--[if IE]>
   		<%= stylesheet_link_tag 'blueprint/ie', :media => "screen, projection" %>
     <![endif]-->		
@@ -22,49 +22,41 @@
     <div class="container">
 <!-- Header -->
     	<div class="span-24">
-    	  <div class="span-16">
-    	    <h1><%= link_to "movielist", root_path %></h1>
-    	  </div>
-    	  <div class="span-8 last" style="text-align: right;">
-    		  <% if logged_in? %>
-    		    <p>
-    		      Logged in as <%= current_user.email %>, 
-    		      <%= link_to 'logout', logout_path %>.
-    		    </p>
-    		  <% else %>
-    		    <p><%= link_to 'Log in', login_path %> or <%= link_to 'sign up', signup_path %></p>.
-          <% end %>
-    	  </div>
+    	  <h1 class="site_title">
+    	    <% if @page_title %>
+    	      <%= link_to "movie", root_path, :style => "color:#000; letter-spacing: -0.05em;" %><%= link_to "list", root_path %>:
+    	      <%= @page_title %>
+    	    <% else %>
+    	      <%= link_to "movie", root_path, :style => "color:#000; letter-spacing: -0.05em;" %><%= link_to "list", root_path %>    	      
+    	    <% end %>
+    	  </h1>
+  	  </div>
     	  
     	  <div class="span-24">
           <div id="navcontainer">
             <ul id="navlist">
-              <% if logged_in? %><li><%= link_to "Add movie", new_movie_path %></li><% end %>
-              <li><%= link_to 'Browse movies', movies_path %></li>
-              <li><%= link_to "Movie night", '' %></li>
-  					  <% if logged_in? %><li><%= link_to 'Logout', logout_path %></li><% end %>
+              <li><%= link_to_with_class 'browse movies', movies_path %></li>
+              <li><%= link_to_with_class "movie night", '' %></li>
+  					  <% if logged_in? %>
+                <li><%= link_to_with_class "add movie", new_movie_path %></li>
+  					    <li><%= link_to_with_class 'seen', user_seen_index_path(current_user) %></li>
+  					    <li><%= link_to_with_class 'towatch', user_towatch_index_path(current_user) %></li>
+  					    <li><%= link_to_with_class 'favorites', user_favorites_path(current_user) %></li>
+  					    <li><%= link_to_with_class 'logout', logout_path %></li>
+  					  <% else %>
+  					    <li><%= link_to_with_class 'log in', login_path %></li>
+  					    <li><%= link_to_with_class 'sign up', signup_path %></li>
+  					  <% end %>
             </ul>
           </div>
         </div>
-			  
-			  <% if logged_in? %>
-          <div class="span-24">
-            <div id="navcontainer">
-              <ul id="navlist">
-                <li>Your movies:</li>
-    					  <li><%= link_to 'Seen',       user_seen_movies_path(current_user) %></li>
-    					  <li><%= link_to 'To watch',   user_to_watch_movies_path(current_user) %></li>
-    					  <li><%= link_to 'Favorites',  user_favorite_movies_path(current_user) %></li>
-              </ul>
-            </div>
-    	    </div>
-		    <% end %>
 <!-- Main -->    	
-    	<div class="span-24">
-    	  <div class="span-24">
+    	<div class="span-24" style="margin-left: 0.5em;">
+    	  <div class="span-24" style="margin-bottom: 1em;">
+  	    	<%# flash[:notice] = "Your bajs was successfully bajsad." %>
 			    <%= flash_messages %>
 			  </div>
-			  <div class="span-24">			  
+			  <div class="span-24">
 			    <%= yield %>
 			  </div>
     	</div>

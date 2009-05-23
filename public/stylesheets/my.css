@@ -1,0 +1,70 @@
+h1.site_title a {
+  text-decoration: none;
+  color: #333;
+}
+h1.site_title {
+  font-size: 4em;
+  margin-left: 10px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.2em;
+}
+
+h1 {
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+/* Listamatic: Kalsey CSS tabs 
+   http://css.maxdesign.com.au/listamatic/horizontal08.htm */
+
+#navlist
+{
+border-bottom: 1px solid #ccc;
+margin: 0;
+padding-bottom: 33px;
+padding-left: 10px;
+}
+
+#navlist ul, #navlist li
+{
+display: inline;
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+#navlist a:link, #navlist a:visited
+{
+background: #E8EBF0;
+border: 1px solid #ccc;
+color: #666;
+float: left;
+font-size: 1.2em;
+font-weight: normal;
+line-height: 24px;
+margin-right: 16px;
+padding: 4px 10px 4px 10px;
+text-decoration: none;
+}
+
+#navlist a:link#current, #navlist a:visited#current
+{
+background: #fff;
+border-bottom: 1px solid #fff;
+color: #000;
+}
+
+#navlist a:hover { color: #f00; }
+
+body.section-1 #navlist li#nav-1 a,
+body.section-2 #navlist li#nav-2 a,
+body.section-3 #navlist li#nav-3 a,
+body.section-4 #navlist li#nav-4 a
+{
+background: #fff;
+border-bottom: 1px solid #fff;
+color: #000;
+}
+
+#navlist ul a:hover { color: #f00 !important; }

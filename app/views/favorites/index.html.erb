@@ -1,0 +1,5 @@
+<%= title 'Your favorite movies' %>
+
+<%= render :partial => 'movies/top' %>
+<%= render :partial => 'movies/show', :collection => @movies, :as => :movie %>
+<%= render :partial => 'movies/bottom' %>

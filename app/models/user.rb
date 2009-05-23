@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   
   # Relationships
   has_and_belongs_to_many :roles
-  has_many :to_watch_movies
-  has_many :seen_movies
-  has_many :favorite_movies
+  has_many :towatch
+  has_many :seen
+  has_many :favorites
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -54,28 +54,28 @@ class User < ActiveRecord::Base
   end
   
   # Get Movie objects for seen movies
-  def movies_seen
+  def seen_movies
     movies = []
-    self.seen_movies.each do |seen|
+    self.seen.each do |seen|
       movies << seen.movie
     end
     return movies
   end
 
   # Get Movie objects for favorite movies
-  def movies_favorite
+  def favorite_movies
     movies = []
-    self.favorite_movies.each do |favorite|
+    self.favorites.each do |favorite|
       movies << favorite.movie
     end
     return movies
   end
 
   # Get Movie objects for movies to watch
-  def movies_to_watch
+  def towatch_movies
     movies = []
-    self.to_watch_movies.each do |to_watch|
-      movies << to_watch.movie
+    self.towatch.each do |towatch|
+      movies << towatch.movie
     end
     return movies
   end

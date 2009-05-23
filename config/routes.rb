@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :movies, 
-    :member => { :seen => :post, :to_watch => :post, :favorite => :post }
+    :member => { :seen => :post, :towatch => :post, :favorite => :post }
 
-  map.resources :seen_movies
-  map.resources :to_watch_movies
-  map.resources :favorite_movies  
+  map.resources :seen
+  map.resources :towatch
+  map.resources :favorites
  
   # Restful Authentication Rewrites
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.open_id_create '/opencreate', :controller => "users", :action => "create", :requirements => { :method => :get }
   
   # Restful Authentication Resources
-  map.resources :users, :has_many => [:seen_movies, :to_watch_movies, :favorite_movies]
+  map.resources :users, :has_many => [:seen, :towatch, :favorites]
   map.resources :passwords
   map.resource :session
   

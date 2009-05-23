@@ -18,8 +18,8 @@
       <% end %>
     </td>
     <td>
-      <% if not movie.to_watch?(current_user) %>
-        <%= link_to 'To watch', to_watch_movie_path(movie), :method => :post %>
+      <% if not movie.towatch?(current_user) %>
+        <%= link_to 'To watch', towatch_movie_path(movie), :method => :post %>
       <% end %>
     </td>
     <td>
