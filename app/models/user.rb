@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   has_many :towatch
   has_many :seen
   has_many :favorites
+  
+  has_many :seen_movies,      :through => :seen,      :source => :movie
+  has_many :towatch_movies,   :through => :towatch,   :source => :movie
+  has_many :favorite_movies,  :through => :favorites, :source => :movie
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -53,33 +57,6 @@ class User < ActiveRecord::Base
     new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
   end
   
-  # Get Movie objects for seen movies
-  def seen_movies
-    movies = []
-    self.seen.each do |seen|
-      movies << seen.movie
-    end
-    return movies
-  end
-
-  # Get Movie objects for favorite movies
-  def favorite_movies
-    movies = []
-    self.favorites.each do |favorite|
-      movies << favorite.movie
-    end
-    return movies
-  end
-
-  # Get Movie objects for movies to watch
-  def towatch_movies
-    movies = []
-    self.towatch.each do |towatch|
-      movies << towatch.movie
-    end
-    return movies
-  end
-
   protected
     
   def make_activation_code
