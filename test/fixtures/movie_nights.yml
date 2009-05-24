@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  users: MyString
+  movies_towatch: MyText
+  movies_seen: MyText
+
+two:
+  users: MyString
+  movies_towatch: MyText
+  movies_seen: MyText

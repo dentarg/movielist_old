@@ -1,0 +1,18 @@
+<p>
+  <b>Users:</b>
+  <%=h @movie_night.users %>
+</p>
+
+<p>
+  <b>Movies towatch:</b>
+  <%=h @movie_night.movies_towatch %>
+</p>
+
+<p>
+  <b>Movies seen:</b>
+  <%=h @movie_night.movies_seen %>
+</p>
+
+
+<%= link_to 'Edit', edit_movie_night_path(@movie_night) %> |
+<%= link_to 'Back', movie_nights_path %>

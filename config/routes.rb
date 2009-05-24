@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :movie_nights
+
   map.resources :movies, 
     :member => { :seen => :post, :towatch => :post, :favorite => :post }
 

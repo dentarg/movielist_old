@@ -1,0 +1,24 @@
+<h1>Listing movie_nights</h1>
+
+<table>
+  <tr>
+    <th>Users</th>
+    <th>Movies towatch</th>
+    <th>Movies seen</th>
+  </tr>
+
+<% for movie_night in @movie_nights %>
+  <tr>
+    <td><%=h movie_night.users %></td>
+    <td><%=h movie_night.movies_towatch %></td>
+    <td><%=h movie_night.movies_seen %></td>
+    <td><%= link_to 'Show', movie_night %></td>
+    <td><%= link_to 'Edit', edit_movie_night_path(movie_night) %></td>
+    <td><%= link_to 'Destroy', movie_night, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New movie_night', new_movie_night_path %>
