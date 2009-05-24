@@ -1,7 +1,7 @@
 class TowatchController < ApplicationController
   def index
     @user   = User.find(params[:user_id])
-    @movies = @user.towatch_movies
+    @movies = @user.towatch
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,12 +12,18 @@ class TowatchController < ApplicationController
   # DELETE /to_watch_movies/1
   # DELETE /to_watch_movies/1.xml
   def destroy
-    @to_watch_movie = Towatch.find(params[:id])
-    @to_watch_movie.destroy
-
+    @towatch = Towatch.find(params[:id])
+    @movie   = @towatch.movie
+    @towatch.destroy
+    
+    notice = "#{@movie.title} removed from your to watch list."
     respond_to do |format|
-      format.html { redirect_to(to_watch_movies_url) }
-      format.xml  { head :ok }
+      format.js do
+        render :update do |page|
+          page.replace_html 'message', notice
+          page.hide dom_id(@movie) + '_row'
+        end
+      end
     end
   end
 end

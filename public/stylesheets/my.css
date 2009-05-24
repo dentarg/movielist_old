@@ -15,6 +15,25 @@ h1 {
   text-transform: lowercase;
 }
 
+tr.odd {
+  background-color: #eeefff;
+}
+
+div#flash-notice {
+   margin-top: 0.3em;
+   margin-bottom: 0.3em;
+   text-align: left;
+}
+
+div#flash-notice em {
+  background-color: #FFFFCC;
+}
+
+em div#flash-notice {
+  background-color: #FFFFCC;
+}
+
+
 /* Listamatic: Kalsey CSS tabs 
    http://css.maxdesign.com.au/listamatic/horizontal08.htm */
 
@@ -55,7 +74,7 @@ border-bottom: 1px solid #fff;
 color: #000;
 }
 
-#navlist a:hover { color: #f00; }
+#navlist a:hover { color: #000; }
 
 body.section-1 #navlist li#nav-1 a,
 body.section-2 #navlist li#nav-2 a,
@@ -67,4 +86,4 @@ border-bottom: 1px solid #fff;
 color: #000;
 }
 
-#navlist ul a:hover { color: #f00 !important; }
+#navlist ul a:hover { color: #000 !important; }

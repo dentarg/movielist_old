@@ -1,7 +1,7 @@
 class SeenController < ApplicationController
   def index
     @user   = User.find(params[:user_id])
-    @movies = @user.seen_movies
+    @movies = @user.seen
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,12 +12,18 @@ class SeenController < ApplicationController
   # DELETE /seen_movies/1
   # DELETE /seen_movies/1.xml
   def destroy
-    @seen_movie = Seen.find(params[:id])
-    @seen_movie.destroy
-
+    @seen   = Seen.find(params[:id])
+    @movie  = @seen.movie
+    @seen.destroy
+    
+    notice = "#{@movie.title} removed from your seen list."
     respond_to do |format|
-      format.html { redirect_to(seen_movies_url) }
-      format.xml  { head :ok }
+      format.js do
+        render :update do |page|
+          page.replace_html 'message', notice
+          page.hide dom_id(@movie) + '_row'
+        end
+      end
     end
   end
 end

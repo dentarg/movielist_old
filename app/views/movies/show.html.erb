@@ -1,13 +1,5 @@
 <%= title 'Movie' %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Year</th>
-    <th>IMDB</th>
-    <th>DN</th>
-  </tr>
-
-<%= render :partial => 'show', :locals => { :movie => @movie } %>
-
-</table>
+<%= render :partial => 'movies/top' %>
+<%= render :partial => 'movies/show', :locals => { :movie => @movie } %>
+<%= render :partial => 'movies/bottom' %>

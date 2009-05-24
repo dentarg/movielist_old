@@ -51,10 +51,11 @@
           </div>
         </div>
 <!-- Main -->    	
-    	<div class="span-24" style="margin-left: 0.5em;">
-    	  <div class="span-24" style="margin-bottom: 1em;">
-  	    	<%# flash[:notice] = "Your bajs was successfully bajsad." %>
-			    <%= flash_messages %>
+    	<div class="span-24" style="margin-left: 10px;">
+    	  <div class="span-24">
+    		  <div id="flash-notice">
+    		  	<em id="message"><%= flash_messages %></em> &nbsp;
+    		  </div>
 			  </div>
 			  <div class="span-24">
 			    <%= yield %>

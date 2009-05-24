@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
   def index
     @user   = User.find(params[:user_id])
-    @movies = @user.favorite_movies
+    @movies = @user.favorites
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,11 +13,17 @@ class FavoritesController < ApplicationController
   # DELETE /favorite_movies/1.xml
   def destroy
     @favorite = Favorite.find(params[:id])
+    @movie    = @favorite.movie
     @favorite.destroy
-
+    
+    notice = "#{@movie.title} removed from your favorite list."
     respond_to do |format|
-      format.html { redirect_to(favorites_url) }
-      format.xml  { head :ok }
+      format.js do
+        render :update do |page|
+          page.replace_html 'message', notice
+          page.hide dom_id(@movie) + '_row'
+        end
+      end
     end
   end
 end

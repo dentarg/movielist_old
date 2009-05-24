@@ -1,34 +1,61 @@
-<tr>
-  <td><%= link_to movie.title, movie_path(movie) %></td>
-  <td><%= movie.year %></td>
-  <td>
-    <% if movie.imdb_rating %>
-      <%= link_to movie.imdb_rating, "http://www.imdb.com/title/#{movie.imdb_id}/" %>
-    <% end %>
-  </td>
-  <td>
-    <% if movie.dn_grade %>
-      <%= link_to movie.dn_grade, movie.dn_url %>
-    <% end %>
-  </td>
-  <% if logged_in? %>
+<% if movie %>
+  <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(movie.movie) %>_row">
+    <td><%= link_to movie.title, movie_path(movie) %></td>
+    <td><%= movie.year %></td>
     <td>
-      <% if not movie.seen?(current_user) %>
-        <%= link_to 'Seen', seen_movie_path(movie), :method => :post %>
+      <% if movie.imdb_rating %>
+        <%= link_to movie.imdb_rating, "http://www.imdb.com/title/#{movie.imdb_id}/" %>
       <% end %>
     </td>
     <td>
-      <% if not movie.towatch?(current_user) %>
-        <%= link_to 'To watch', towatch_movie_path(movie), :method => :post %>
-      <% end %>
-    </td>
-    <td>
-      <% if not movie.favorite?(current_user) %>
-        <%= link_to 'Favorite', favorite_movie_path(movie), :method => :post %>
+      <% if movie.dn_grade %>
+        <%= link_to movie.dn_grade, movie.dn_url %>
       <% end %>
     </td>
     
-    <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-    <td><%= link_to 'Destroy', movie, :confirm => 'Are you sure?', :method => :delete %></td>
-  <% end %>
-</tr>
+    <% if logged_in? %>
+      <td>
+        <% if not movie.seen?(current_user) %>
+          <%= link_to_remote 'seen', { :url => seen_movie_path(movie.movie), :method => :post }, 
+                :id => "#{dom_id(movie.movie)}_seen_link", :title => 'Mark as seen' %>
+        <% end %>
+      </td>
+      <td>
+        <% if not movie.towatch?(current_user) %>
+        <%= link_to_remote 'towatch', { :url => towatch_movie_path(movie.movie), :method => :post }, 
+              :id => "#{dom_id(movie.movie)}_towatch_link", :title => 'Mark as movie to watch' %>
+        <% end %>
+      </td>
+      <td>
+        <% if not movie.favorite?(current_user) %>
+        <%= link_to_remote 'favorite', { :url => favorite_movie_path(movie.movie), :method => :post }, 
+              :id => "#{dom_id(movie.movie)}_favorite_link", :title => 'Mark as favorite' %>
+        <% end %>
+      </td>
+      
+      <td>
+        <%# if current_page?(url_for(movies_path)) %>
+          
+        <% if current_page?(url_for(user_seen_index_path(current_user))) %>
+          <%= link_to_remote 'remove', 
+                :url => { :controller=>"seen", :action=>"destroy", :id => movie },
+                :method => :delete %>
+
+        <% elsif current_page?(url_for(user_towatch_index_path(current_user))) %>
+          <%= link_to_remote 'remove', 
+                :url => { :controller=>"towatch", :action=>"destroy", :id => movie },
+                :method => :delete %>
+
+        <% elsif current_page?(url_for(user_favorites_path(current_user))) %>
+          <%= link_to_remote 'remove', 
+                :url => { :controller=>"favorites", :action=>"destroy", :id => movie },
+                :method => :delete %>
+
+        <% else %>
+          <%= link_to 'destroy', movie, :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      </td>
+      
+    <% end %>
+  </tr>
+<% end %>

@@ -2,49 +2,76 @@ class MoviesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
 
   def seen
-    @movie            = Movie.find(params[:id])
-    @seen_movie       = SeenMovie.new
-    @seen_movie.movie = @movie
-    @seen_movie.user  = current_user
+    @movie      = Movie.find(params[:id])
+    @seen       = Seen.new
+    @seen.movie = @movie
+    @seen.user  = current_user
 
     respond_to do |format|
-      if @seen_movie.save
-        flash[:notice] = "#{@movie.name} added to your seen list."
-        format.html { redirect_to(user_seen_movies_path(current_user)) }
+      if @seen.save
+        notice = "#{@movie.title} added to your seen list."
+        format.html do
+          flash[:notice] = notice
+          redirect_to(user_seen_index_path(current_user))
+        end
+        format.js do
+          render :update do |page|
+            page.replace_html 'message', notice
+            page.hide dom_id(@movie) + '_seen_link'
+          end
+        end
       else # FIXME
-        format.html { render :action => "new" }
+        format.html { render :text => "ERROR" }
       end
     end
   end
   
-  def to_watch
-    @movie                = Movie.find(params[:id])
-    @to_watch_movie       = ToWatchMovie.new
-    @to_watch_movie.movie = @movie
-    @to_watch_movie.user  = current_user
+  def towatch
+    @movie         = Movie.find(params[:id])
+    @towatch       = Towatch.new
+    @towatch.movie = @movie
+    @towatch.user  = current_user
 
     respond_to do |format|
-      if @to_watch_movie.save
-        flash[:notice] = "#{@movie.name} added to your to watch list."
-        format.html { redirect_to(user_to_watch_movies_path(current_user)) }
+      if @towatch.save
+        notice = "#{@movie.title} added to your to watch list."
+        format.html do
+          flash[:notice] = notice
+          redirect_to(user_towatch_index_path(current_user))
+        end
+        format.js do
+          render :update do |page|
+            page.replace_html 'message', notice
+            page.hide dom_id(@movie) + '_towatch_link'
+          end
+        end
       else # FIXME
-        format.html { render :action => "new" }
+        format.html { render :text => "ERROR" }
       end
     end
   end  
 
   def favorite
-    @movie                = Movie.find(params[:id])
-    @favorite_movie       = FavoriteMovie.new
-    @favorite_movie.movie = @movie
-    @favorite_movie.user  = current_user
+    @movie          = Movie.find(params[:id])
+    @favorite       = Favorite.new
+    @favorite.movie = @movie
+    @favorite.user  = current_user
 
     respond_to do |format|
-      if @favorite_movie.save
-        flash[:notice] = "#{@movie.name} added to your favorite list."
-        format.html { redirect_to(user_favorite_movies_path(current_user)) }
+      if @favorite.save
+        notice = "#{@movie.title} added to your to favorites."
+        format.html do
+          flash[:notice] = notice
+          redirect_to(user_favorites_path(current_user))
+        end
+        format.js do
+          render :update do |page|
+            page.replace_html 'message', notice
+            page.hide dom_id(@movie) + '_favorite_link'
+          end
+        end
       else # FIXME
-        format.html { render :action => "new" }
+        format.html { render :text => "ERROR" }
       end
     end
   end
@@ -98,6 +125,7 @@ class MoviesController < ApplicationController
       @movie.imdb_id        = @imdb_url.match(Movie.imdb_url_regexp).to_a[3]
       @movie.imdb_rating    = imdb.rating
       @movie.imdb_update_at = Time.now
+      @movie.created_by     = current_user
     end
 
     respond_to do |format|
