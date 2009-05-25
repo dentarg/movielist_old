@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090524223058) do
+ActiveRecord::Schema.define(:version => 20090525115556) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "movie_id"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(:version => 20090524223058) do
   end
 
   create_table "movie_nights", :force => true do |t|
-    t.string   "users"
-    t.text     "movies_towatch"
-    t.text     "movies_seen"
+    t.string   "user_ids"
+    t.text     "towatch_movie_ids"
+    t.text     "seen_movie_ids"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

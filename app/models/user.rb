@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
   end
   
+  def to_s
+    self.login
+  end
+  
   protected
     
   def make_activation_code

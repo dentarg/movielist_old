@@ -24,10 +24,10 @@
     	<div class="span-24">
     	  <h1 class="site_title">
     	    <% if @page_title %>
-    	      <%= link_to "movie", root_path, :style => "color:#000; letter-spacing: -0.05em;" %><%= link_to "list", root_path %>:
-    	      <%= @page_title %>
+    	      <%= link_to "movie", root_path, :id => "movie" %><%= link_to "list", root_path, :id => "list" %><span id="colon">:</span>
+    	      <span id="title"><%= @page_title %></span>
     	    <% else %>
-    	      <%= link_to "movie", root_path, :style => "color:#000; letter-spacing: -0.05em;" %><%= link_to "list", root_path %>    	      
+    	      <%= link_to "movie", root_path, :id => "movie" %><%= link_to "list", root_path, :id => "list" %>    	      
     	    <% end %>
     	  </h1>
   	  </div>
@@ -36,7 +36,7 @@
           <div id="navcontainer">
             <ul id="navlist">
               <li><%= link_to_with_class 'browse movies', movies_path %></li>
-              <li><%= link_to_with_class "movie night", '' %></li>
+              <li><%= link_to_with_class "movie night", movie_nights_path %></li>
   					  <% if logged_in? %>
                 <li><%= link_to_with_class "add movie", new_movie_path %></li>
   					    <li><%= link_to_with_class 'seen', user_seen_index_path(current_user) %></li>

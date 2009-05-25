@@ -1,18 +1,41 @@
-<p>
-  <b>Users:</b>
-  <%=h @movie_night.users %>
-</p>
+<%= title "movie night ##{@movie_night}" %>
 
-<p>
-  <b>Movies towatch:</b>
-  <%=h @movie_night.movies_towatch %>
-</p>
+<p><strong>when: </strong><%= @movie_night.created_at.to_formatted_s(:short) %>
 
-<p>
-  <b>Movies seen:</b>
-  <%=h @movie_night.movies_seen %>
-</p>
+<% unless @users.empty? -%>
+  <strong>who:</strong >
+    <% for user in @users -%>
+      <% if user != @users.last && user != @users[-2] -%>
+        <%= user %>,
+      <% elsif user == @users[-2] -%>
+        <%= user %>
+      <% else -%>
+        and <%= user %>
+      <% end -%>
+    <% end -%>
+  </p>
+<% end -%>
+
+<% unless @movies_towatch.empty? %>
+  <h2>movies everybody want to watch</h2>
+  <%= render :partial => 'movies/top' %>
+  <%= render :partial => 'movies/show', :collection => @movies_towatch, :as => :movie %>
+  <%= render :partial => 'movies/bottom' %>
+<% else %>
+  <h2>movies everybody want to watch</h2>
+  <p>didn't find any...</p>
+<% end %>
 
 
-<%= link_to 'Edit', edit_movie_night_path(@movie_night) %> |
-<%= link_to 'Back', movie_nights_path %>
+
+<% unless @users.empty? %>
+  <% for user in @users %>
+    <% unless @movies_seen.empty? %>
+      <h2>movies <%= user %> want to watch, and others haven't seen</h2>
+      <% movies = user.towatch_movies - (@movies_seen - user.towatch_movies) %>
+      <%= render :partial => 'movies/top' %>
+      <%= render :partial => 'movies/show', :collection => movies, :as => :movie %>
+      <%= render :partial => 'movies/bottom' %>
+    <% end %>
+  <% end %>
+<% end %>

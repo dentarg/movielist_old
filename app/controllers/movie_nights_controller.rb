@@ -13,7 +13,10 @@ class MovieNightsController < ApplicationController
   # GET /movie_nights/1
   # GET /movie_nights/1.xml
   def show
-    @movie_night = MovieNight.find(params[:id])
+    @movie_night    = MovieNight.find(params[:id])
+    @users          = @movie_night.users
+    @movies_towatch = @movie_night.movies_towatch
+    @movies_seen    = @movie_night.movies_seen
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +44,12 @@ class MovieNightsController < ApplicationController
   # POST /movie_nights.xml
   def create
     @movie_night = MovieNight.new(params[:movie_night])
+    
+    # This isn't good code
+    @movie_night.user_ids = "[2, 3]"
+    users = eval(@movie_night.user_ids).map { |u| User.find(u) }
+    @movie_night.towatch_movie_ids = eval(users.map(&:towatch_movie_ids).map(&:to_json).join("&")).to_json
+    @movie_night.seen_movie_ids    = eval(users.map(&:seen_movie_ids).map(&:to_json).join("|")).to_json
 
     respond_to do |format|
       if @movie_night.save
