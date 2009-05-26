@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
   validates_uniqueness_of :imdb_id, :on => :create, 
     :message => "Movie already exists"#, :allow_nil => true, :allow_blank => true
 
+  belongs_to :creator, :class_name => 'User', :foreign_key => 'created_by'
   has_many :favorites, :dependent => :destroy
   has_many :seen, :dependent => :destroy
   has_many :towatch, :dependent => :destroy
@@ -13,8 +14,14 @@ class Movie < ActiveRecord::Base
     IMDB_URL_RE_OK
   end
   
+  # Makes sense, dosen't it? :-)
+  # Hack for seen, towatch and favorite
   def movie
     self
+  end
+  
+  def to_s
+    self.title
   end
 
   def seen?(user)

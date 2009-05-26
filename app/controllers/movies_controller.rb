@@ -102,6 +102,7 @@ class MoviesController < ApplicationController
   # GET /movies/new.xml
   def new
     @movie = Movie.new
+    @site_url = APP_CONFIG[:site_url]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -118,6 +119,7 @@ class MoviesController < ApplicationController
   # POST /movies.xml
   def create
     @movie = Movie.new(params[:movie])
+    @movie.creator          = current_user
     if @imdb_url = params[:movie][:imdb_url]
       imdb = IMDB.new(@imdb_url)
       @movie.title          = imdb.title
@@ -125,7 +127,6 @@ class MoviesController < ApplicationController
       @movie.imdb_id        = @imdb_url.match(Movie.imdb_url_regexp).to_a[3]
       @movie.imdb_rating    = imdb.rating
       @movie.imdb_update_at = Time.now
-      @movie.created_by     = current_user
     end
 
     respond_to do |format|

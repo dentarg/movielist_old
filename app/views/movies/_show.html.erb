@@ -1,6 +1,6 @@
 <% if movie %>
   <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(movie.movie) %>_row">
-    <td><%= link_to movie.title, movie_path(movie) %></td>
+    <td><%= link_to movie.title, movie_path(movie.movie) %></td>
     <td><%= movie.year %></td>
     <td>
       <% if movie.imdb_rating %>

@@ -1,23 +1,26 @@
-<div class="span-12">
-  <% if !logged_in? %>
-    <p><%= link_to 'Log in', login_path %> or <%= link_to 'sign up', signup_path %></p>
-  <% end %>
-  
-  <h2>Add movie</h2>
-  
-  <p>
-    url_for: 
-    <%#= url = url_for(user_seen_index_path(current_user)) %>
-    <%= url = url_for({}) %>
-  <p>
-    current_page:
-    <%= current_page?(url) %>
+<div class="span-11">
+  <h2>welcome to movielist</h2>
+  <p class="preamble">
+    movielist allows you to keep track of which movies you have seen, which movies 
+    you want to see and your favorite movies. 
   </p>
-    
-  
-  <h2>Movie night</h2>
+  <p class="preamble">
+    Another nice feature is something called 
+    <%= link_to 'movie night', movie_nights_path %>, which helps you decied which movie you and your friends should watch next.
+  </p>
+  <p class="preamble">
+    The site relies on <%= link_to 'IMDB', 'http://www.imdb.com' %>. Every movie added to the site must
+    have a valid IMDB URL. Feel free to <%= link_to 'add', new_movie_path %> movies missing.
+  </p>
 </div>
 
-<div class="span-12 last">
-  <h2>blah</h2>
+<div class="span-1">
+  &nbsp;
+</div>
+
+<div class="span-11 last">
+  <h2>add movie</h2>
+
+  <h2>movie night</h2>
+  
 </div>

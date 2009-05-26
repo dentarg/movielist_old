@@ -26,3 +26,37 @@
 
 
 
+<p>
+  url_for: 
+  <%#= url = url_for(user_seen_index_path(current_user)) %>
+  <%= url = url_for({}) %>
+<p>
+  current_page:
+  <%= current_page?(url) %>
+</p>
+
+<% unless movie_night.participants.empty? -%>
+<strong>participants:</strong >
+  <% for user in movie_night.participants -%>
+  
+    <%# First %>
+    <% if user == movie_night.participants.first -%>
+      <%= user %>
+
+    <%# Neither last or second last %>
+    <% elsif user != movie_night.participants.last && user != movie_night.participants[-2] -%>
+      <%= user %>,
+
+    <%# Second last %>
+    <% elsif user == movie_night.participants[-2] -%>
+      and <%= user %>
+
+    <%# Last %>
+    <% elsif user == movie_night.participants.last -%>
+      <%= user %>
+
+    <% else -%>
+      <%= user %>
+
+    <% end -%>
+  <% end -%>

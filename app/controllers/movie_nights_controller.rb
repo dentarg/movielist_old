@@ -1,6 +1,9 @@
 class MovieNightsController < ApplicationController
+  before_filter :login_required, :only => [:create, :destroy, :search]
+  
   def index
-    @movie_nights = MovieNight.find(:all)
+    @movie_nights = MovieNight.find(:all, :order => 'created_at DESC')
+    @movie_night = MovieNight.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,7 +46,8 @@ class MovieNightsController < ApplicationController
   def register
     @movie_night = MovieNight.find(params[:id])
     @participant = User.find(params[:user_id])
-    if @movie_night.register(@participant)
+    
+    if @movie_night.register(@participant) && @movie_night.creator == current_user
       notice = "#{@participant} added!"
       respond_to do |format|
         format.js do
@@ -78,7 +82,8 @@ class MovieNightsController < ApplicationController
   def unregister
     @movie_night = MovieNight.find(params[:id])
     @participant = User.find(params[:user_id])
-    if @movie_night.unregister(@participant)
+    
+    if @movie_night.unregister(@participant) && @movie_night.creator == current_user
       notice = "#{@participant} removed!"
       respond_to do |format|
         format.js do
@@ -108,21 +113,14 @@ class MovieNightsController < ApplicationController
     end
   end
 
-  def new
-    @movie_night = MovieNight.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @movie_night }
-    end
-  end
-
   def create
-    @movie_night = MovieNight.new(params[:movie_night])
+    @movie_night = MovieNight.new
+    @movie_night.creator = current_user
+    @movie_night.participants << current_user
     
     respond_to do |format|
       if @movie_night.save
-        flash[:notice] = 'MovieNight was successfully created.'
+        #flash[:notice] = 'MovieNight was successfully created.'
         format.html { redirect_to(@movie_night) }
         format.xml  { render :xml => @movie_night, :status => :created, :location => @movie_night }
       else
@@ -134,7 +132,7 @@ class MovieNightsController < ApplicationController
 
   def destroy
     @movie_night = MovieNight.find(params[:id])
-    @movie_night.destroy
+    @movie_night.destroy if @movie_night.creator == current_user
 
     respond_to do |format|
       format.html { redirect_to(movie_nights_url) }

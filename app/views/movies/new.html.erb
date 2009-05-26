@@ -1,12 +1,34 @@
 <%= title 'Add movie' %>
 
+<div class="span-16 last">
+
 <% form_for(@movie) do |f| %>
   <%= f.error_messages %>
+
+  <p><%= f.label :imdb_url, 'IMDB URL' %></p>
   <p>
-    <%= f.label :imdb_url, 'IMDB URL' %><br />
-    <%= f.text_field :imdb_url, :class => "text" %>
+    <%= f.text_field :imdb_url, :class => "text", :value => params[:url] %>
   </p>
   <p>
     <%= f.submit "Add", :class => "submit" %>
   </p>
 <% end %>
+
+
+<h2>Bookmarklet</h2>
+
+<p class="preamble">
+  to quickly add movies, drag the link below to your Bookmarks Bar.
+  click it when you are visiting an IMDB movie page, and the browser will open a new window 
+  with this page and the imdb url filled in.
+</p>
+
+<ul>
+  <li><a title="Drag this to your Bookmarks Bar"
+    href="javascript:(function(){f='<%= @site_url %>/movies/new?url='+encodeURIComponent(window.location.href);a=function(){if(!window.open(f))location.href=f};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})()">
+    movielist: add movie
+    </a>
+  </li>
+</ul>
+
+</div>

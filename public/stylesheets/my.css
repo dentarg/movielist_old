@@ -15,6 +15,10 @@ body {
   color: #333;
   font-size:100%;
   background:#fff;
+  font-family: "Georgia", serif;
+}
+
+h1, h2, ul, table, #message, #user-info {
   font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
@@ -64,6 +68,10 @@ h2 {
   margin-bottom: 0.1em;
   letter-spacing: -0.05em;
   color: #111;
+  text-transform: lowercase;
+}
+h2 a {
+  text-decoration: none;
 }
 
 strong {
@@ -113,10 +121,13 @@ ol {
   list-style-type:decimal;
 }
 
+div#user-info {
+  text-align: right;
+}
 
 div#flash-notice {
    margin-top: 0.3em;
-   margin-bottom: 0.3em;
+   margin-bottom: 0.5em;
    text-align: left;
 }
 
@@ -128,6 +139,20 @@ em div#flash-notice {
   background-color: #FFFFCC;
 }
 
+p.preamble {
+  font-family: "Georgia", serif;
+  margin-bottom: 1em;
+  font-size:105%;
+  text-transform: lowercase;
+}
+
+label {
+  text-align:       right;
+  width:            80px;
+  padding-right:    5px;
+  font-weight:      bold;
+  text-transform: lowercase;
+}
 
 /* Listamatic: Kalsey CSS tabs 
    http://css.maxdesign.com.au/listamatic/horizontal08.htm */
@@ -138,6 +163,7 @@ border-bottom: 1px solid #ccc;
 margin: 0;
 padding-bottom: 33px;
 padding-left: 10px;
+padding-right: 0;
 }
 
 #navlist ul, #navlist li
@@ -171,14 +197,10 @@ color: #000;
 
 #navlist a:hover { color: #000; }
 
-body.section-1 #navlist li#nav-1 a,
-body.section-2 #navlist li#nav-2 a,
-body.section-3 #navlist li#nav-3 a,
-body.section-4 #navlist li#nav-4 a
-{
-background: #fff;
-border-bottom: 1px solid #fff;
-color: #000;
+body.section-1 #navlist li#nav-1 a, body.section-2 #navlist li#nav-2 a, body.section-3 #navlist li#nav-3 a, body.section-4 #navlist li#nav-4 a {
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  color: #000;
 }
 
 #navlist ul a:hover { color: #000 !important; }

@@ -74,12 +74,6 @@ caption {background:#eee;}
 .bottom {margin-bottom:0;padding-bottom:0;}
 
 /* forms.css */
-label {
-  text-align:       right;
-  width:            80px;
-  padding-right:    5px;
-  font-weight:      bold;
-}
 
 fieldset {padding:1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
 legend {font-weight:bold;font-size:1.2em;}

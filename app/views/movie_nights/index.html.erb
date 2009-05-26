@@ -1,20 +1,39 @@
-<%= title "Listing movie_nights" %>
+<%= title "movie nights" %>
 
-<table>
-  <tr>
-    <th>created_at</th>
-  </tr>
+<% if logged_in? %>
+  <div style="margin-bottom: 1em;">
+    <% form_for(@movie_night) do |f| %>
+      <p><%= f.submit "create new movie night" %></p>
+    <% end %>
+  </div>
+<% end %>
+
 
 <% for movie_night in @movie_nights %>
-  <tr>
-    <td><%=h movie_night.created_at %></td>
-    <td><%= link_to 'Show', movie_night %></td>
-    <td><%= link_to 'Edit', edit_movie_night_path(movie_night) %></td>
-    <td><%= link_to 'Destroy', movie_night, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+
+  <div style="margin-bottom: 1em;">
+  <h2><%= link_to "#{movie_night}", movie_night_path(movie_night) %></h2>
+  <p>
+    created by <%=h movie_night.creator %> 
+    <%=h time_ago_in_words movie_night.created_at %> ago
+    <% if movie_night.creator == current_user %>
+      (<%= link_to 'delete', movie_night, :confirm => 'Are you sure?', :method => :delete %>)
+    <% end %>
+  </p>
+  
+  <% unless movie_night.participants.empty? -%>
+    <p>
+      <strong>participants:</strong>
+      <%= render :partial => "shared/smart_enum", :locals => { :items => movie_night.participants } %>
+    </p>
+  <% end -%>
+
+  <% unless movie_night.movies_towatch.empty? -%>
+    <p>
+      <strong>movies:</strong>
+      <%= render :partial => "shared/smart_enum", :locals => { :items => movie_night.movies_towatch } %>
+    </p>
+  <% end -%>
+    
+  </div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New movie_night', new_movie_night_path %>

@@ -1,34 +1,39 @@
-<%= title "movie night ##{@movie_night}" %>
+<%= title "#{@movie_night}" %>
 
 <div class="span-16">
-  <h2>add participant</h2>
-
-  <%= text_field_tag :query, nil, {:class => "text", :autocomplete => "off" } %>
-  <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
-
-  <script type="text/javascript" charset="utf-8">
-    $('query').activate()
-  </script>
   
-  <%= observe_field :query, 
-    :frequency => 0.25,
-    :url => search_movie_night_path,
-    :with => 'body',
-    :loading => "Element.show('spinner')",
-    :complete => "Element.hide('spinner')" %>
-
-  <ul id="prospects">
-  </ul>
-
+  <% if @movie_night.creator == current_user %>
+    <h2>add participant</h2>
+    
+    <%= text_field_tag :query, nil, {:class => "text", :autocomplete => "off" } %>
+    <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
+    
+    <script type="text/javascript" charset="utf-8">
+      $('query').activate()
+    </script>
+    
+    <%= observe_field :query, 
+      :frequency => 0.25,
+      :url => search_movie_night_path,
+      :with => 'body',
+      :loading => "Element.show('spinner')",
+      :complete => "Element.hide('spinner')" %>
+    
+    <ul id="prospects">
+    </ul>
+  <% end %>
 </div>
 
-<div class="span-8 last">
+<div class="span-7 last">
   <h2>participants</h2>
-
-  <ul id="participants">
-  <%= render :partial => "participant", :collection => @movie_night.participants,
-        :locals => { :movie_night => @movie_night }%>
-  </ul>
+  <% unless @movie_night.creator == current_user %>
+    <p><%= render :partial => "shared/smart_enum", :locals => { :items => @movie_night.participants } %></p>
+  <% else %>
+    <ul id="participants">
+    <%= render :partial => "participant", :collection => @movie_night.participants,
+          :locals => { :movie_night => @movie_night }%>
+    </ul>
+  <% end %>
 </div>
 
 <div class="span-24">

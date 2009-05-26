@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
   # ["(LOWER(login) LIKE ? OR LOWER(name) LIKE ?) AND (LOWER(login) LIKE ? OR LOWER(name) LIKE ?)", 
   #   "%word1%", "%word1%", "%word2%", "%word2%"]
   
+  # Written by Johan Eckerström <johan@duh.se>
   def self.search(keyword)
     if not keyword.to_s.strip.empty?
       keys = [:login, :name]
