@@ -1,0 +1,4 @@
+<li id="<%= dom_id(participant) %>">
+  <%= participant%> (<%= link_to_remote "remove", 
+        { :url => unregister_user_movie_night_path(participant, movie_night), :method => :post } %>)
+</li>

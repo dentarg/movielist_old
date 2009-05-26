@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   
   # Relationships
   has_and_belongs_to_many :roles
+
+  has_and_belongs_to_many :movie_nights
+  
   has_many :towatch
   has_many :seen
   has_many :favorites
@@ -59,6 +62,35 @@ class User < ActiveRecord::Base
   
   def to_s
     self.login
+  end
+
+  # the magic star
+  # --------------
+  # >> array = [ :a, :b ]
+  # => [:a, :b]
+  # 
+  # >> [ :c, array ]
+  # => [:c, [:a, :b]]
+  # 
+  # >> [ :c, *array ]
+  # => [:c, :a, :b]
+  
+  # search("word1 word2") gives a condition like
+  # ["(LOWER(login) LIKE ? OR LOWER(name) LIKE ?) AND (LOWER(login) LIKE ? OR LOWER(name) LIKE ?)", 
+  #   "%word1%", "%word1%", "%word2%", "%word2%"]
+  
+  def self.search(keyword)
+    if not keyword.to_s.strip.empty?
+      keys = [:login, :name]
+      sql_keys = keys.collect {|k| "LOWER(#{k}) LIKE ?"}.join(' OR ')
+      keyword.gsub!('*', '%')
+      tokens = keyword.split.collect {|c| "%#{c.downcase}%"}
+      condition = [(["(#{sql_keys})"] * tokens.size).join(" AND "),
+        *tokens.collect {|t| [t] * keys.length }.flatten]
+      self.find(:all, :conditions => condition)
+    else
+      []
+    end
   end
   
   protected

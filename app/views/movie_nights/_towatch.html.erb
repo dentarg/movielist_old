@@ -1,0 +1,11 @@
+<div id="movies_towatch">
+  <% unless movies.empty? %>
+    <h2>movies everybody want to watch</h2>
+    <%= render :partial => 'movies/top' %>
+    <%= render :partial => 'movies/show', :collection => movies, :as => :movie %>
+    <%= render :partial => 'movies/bottom' %>
+  <% else %>
+    <h2>movies everybody want to watch</h2>
+    <p>didn't find any...</p>
+  <% end %>
+</div>

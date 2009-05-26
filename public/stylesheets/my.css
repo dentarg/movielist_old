@@ -41,10 +41,10 @@ h1.site_title a {
 
 h1.site_title a#movie {
   letter-spacing: -0.06em;
-  color: #000;  
+  color: #ACACAC;
 }
 h1.site_title a#list {
-  color: #000;
+  color: #9E3232;
 }
 h1.site_title span#colon {
   color: #000;
@@ -94,6 +94,25 @@ th {
 tr.odd {
   background-color: #eeefff;
 }
+
+/*ul#participants li {
+  display: inline;
+  list-style-type: none; 
+}*/
+
+li ul, li ol {
+  margin: 0 1.5em;
+}
+ul, ol {
+  margin: 0 1.5em 1.5em 1.5em;
+}
+ul {
+  list-style-type:disc;
+}
+ol {
+  list-style-type:decimal;
+}
+
 
 div#flash-notice {
    margin-top: 0.3em;

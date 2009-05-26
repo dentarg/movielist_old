@@ -1,41 +1,43 @@
 <%= title "movie night ##{@movie_night}" %>
 
-<p><strong>when: </strong><%= @movie_night.created_at.to_formatted_s(:short) %>
+<div class="span-16">
+  <h2>add participant</h2>
 
-<% unless @users.empty? -%>
-  <strong>who:</strong >
-    <% for user in @users -%>
-      <% if user != @users.last && user != @users[-2] -%>
-        <%= user %>,
-      <% elsif user == @users[-2] -%>
-        <%= user %>
-      <% else -%>
-        and <%= user %>
-      <% end -%>
-    <% end -%>
-  </p>
-<% end -%>
+  <% remote_form_for :query, @query, 
+    :url => search_movie_night_path,
+    :loading => "Element.show('spinner')",
+    :complete => "Element.hide('spinner')" do |f| %>
 
-<% unless @movies_towatch.empty? %>
-  <h2>movies everybody want to watch</h2>
-  <%= render :partial => 'movies/top' %>
-  <%= render :partial => 'movies/show', :collection => @movies_towatch, :as => :movie %>
-  <%= render :partial => 'movies/bottom' %>
-<% else %>
-  <h2>movies everybody want to watch</h2>
-  <p>didn't find any...</p>
-<% end %>
-
-
-
-<% unless @users.empty? %>
-  <% for user in @users %>
-    <% unless @movies_seen.empty? %>
-      <h2>movies <%= user %> want to watch, and others haven't seen</h2>
-      <% movies = user.towatch_movies - (@movies_seen - user.towatch_movies) %>
-      <%= render :partial => 'movies/top' %>
-      <%= render :partial => 'movies/show', :collection => movies, :as => :movie %>
-      <%= render :partial => 'movies/bottom' %>
-    <% end %>
+    <%= f.text_field :body, :class => "text" %>
+    <%= f.submit 'Sök', :class => "submit" %>
+    <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
   <% end %>
-<% end %>
+  <script type="text/javascript" charset="utf-8">
+    $('query_body').activate()
+  </script>
+
+  <ul id="prospects">
+  </ul>
+
+</div>
+
+<div class="span-8 last">
+  <h2>participants</h2>
+
+  <ul id="participants">
+  <%= render :partial => "participant", :collection => @movie_night.participants,
+        :locals => { :movie_night => @movie_night }%>
+  </ul>
+</div>
+
+<div class="span-24">
+  <!-- movies to watch -->
+  <div id="movies_towatch">
+    <%= render :partial => "towatch", :locals => { :movies => @movie_night.movies_towatch } %>
+  </div>
+
+  <!-- movies seen -->
+  <div id="movies_seen">
+    <%= render :partial => "seen", :locals => { :movie_night => @movie_night } %>
+  </div>
+</div>

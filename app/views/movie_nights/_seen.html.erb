@@ -1,0 +1,19 @@
+<div id="movies_seen">
+  <% unless movie_night.participants.empty? %>
+    <% for user in movie_night.participants %>
+      <% unless movie_night.movies_seen.empty? %>
+      
+        <h2>movies <%= user %> want to watch, and others haven't seen</h2>
+      
+        <% movies = user.towatch_movies - (movie_night.movies_seen - user.towatch_movies) %>
+        <% unless movies.empty? %>
+          <%= render :partial => 'movies/top' %>
+          <%= render :partial => 'movies/show', :collection => movies, :as => :movie %>
+          <%= render :partial => 'movies/bottom' %>
+        <% else %>
+          <p>didn't find any...</p>
+        <% end %>        
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
