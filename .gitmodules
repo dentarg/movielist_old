@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/tumblr"]
+	path = vendor/plugins/tumblr
+	url = git://github.com/jeffkreeftmeijer/tumblr.git
