@@ -13,4 +13,16 @@
 <% end -%>
 
 
+<% remote_form_for :query, @query, 
+  :url => search_movie_night_path,
+  :loading => "Element.show('spinner')",
+  :complete => "Element.hide('spinner')" do |f| %>
+
+  <%= f.text_field :body, :class => "text" %>
+  <%= f.submit 'Sök', :class => "submit" %>
+  <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
+
+<% end %>
+
+
 

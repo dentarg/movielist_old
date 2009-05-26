@@ -10,9 +10,8 @@ class MovieNightsController < ApplicationController
 
   def search
     @movie_night = MovieNight.find(params[:id])
-    body    = params[:query][:body]
-    results = User.search(body)
-    #results = results - @movie_night.participants
+    body    = params[:body]
+    results = User.search(body) - @movie_night.participants
 
     respond_to do |format|
       format.js do
@@ -21,9 +20,11 @@ class MovieNightsController < ApplicationController
             page.replace_html 'prospects', :partial => "prospect", 
               :collection => results, :as => :prospect, :locals => { :movie_night => @movie_night }
           elsif body.empty? # No search
-            render :nothing => true
+            page.replace_html 'prospects', :partial => "prospect", 
+              :collection => results, :as => :prospect, :locals => { :movie_night => @movie_night }
           elsif results.empty?
-            render :nothing => true
+            page.replace_html 'prospects', :partial => "prospect", 
+              :collection => results, :as => :prospect, :locals => { :movie_night => @movie_night }
           end
         end
       end

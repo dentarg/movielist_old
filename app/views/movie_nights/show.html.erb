@@ -3,18 +3,19 @@
 <div class="span-16">
   <h2>add participant</h2>
 
-  <% remote_form_for :query, @query, 
-    :url => search_movie_night_path,
-    :loading => "Element.show('spinner')",
-    :complete => "Element.hide('spinner')" do |f| %>
+  <%= text_field_tag :query, nil, {:class => "text", :autocomplete => "off" } %>
+  <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
 
-    <%= f.text_field :body, :class => "text" %>
-    <%= f.submit 'Sök', :class => "submit" %>
-    <img src="/images/spinner.gif" style="display: none; border:none; margin-bottom: -0.5em;" id="spinner" alt="" />
-  <% end %>
   <script type="text/javascript" charset="utf-8">
-    $('query_body').activate()
+    $('query').activate()
   </script>
+  
+  <%= observe_field :query, 
+    :frequency => 0.25,
+    :url => search_movie_night_path,
+    :with => 'body',
+    :loading => "Element.show('spinner')",
+    :complete => "Element.hide('spinner')" %>
 
   <ul id="prospects">
   </ul>
