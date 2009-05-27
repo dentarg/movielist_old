@@ -1,4 +1,4 @@
-set :stages, %w(staging production)
+set :stages, %w(inside outside)
 set :default_stage, "outside"
 require File.expand_path("#{File.dirname(__FILE__)}/../vendor/gems/capistrano-ext-1.2.1/lib/capistrano/ext/multistage")
 
