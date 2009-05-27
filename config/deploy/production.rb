@@ -22,6 +22,7 @@ set :rails_env, "production"
 
 set :user, "dentarg"
 set :domain, "movielist.starkast.net"
+#set :domain, "beaver.starkast.net"
 server domain, :app, :web
 role :db, domain, :primary => true
 
@@ -32,6 +33,7 @@ role :db, domain, :primary => true
 set :scm, :git
 set :branch, "production"
 set :repository, "git@github.com:dentarg/movielist.git"
+#set :port, 2020
 set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
