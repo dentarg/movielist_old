@@ -12,7 +12,7 @@ set :shared_path, "#{deploy_to}/shared"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
-set :use_sudo, true
+set :use_sudo, false
 set :scm_verbose, true
 set :rails_env, "production" 
 
@@ -21,7 +21,7 @@ set :rails_env, "production"
 #############################################################
 
 set :user, "dentarg"
-set :domain, "beaver.starkast.net"
+set :domain, "movielist.starkast.net"
 server domain, :app, :web
 role :db, domain, :primary => true
 
@@ -59,3 +59,6 @@ namespace :deploy do
   end
   
 end
+
+after "deploy:update", "deploy:relink_shared_directories"
+after "deploy:update", "deploy:cleanup"
