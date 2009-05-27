@@ -52,7 +52,9 @@
                 :method => :delete %>
 
         <% else %>
-          <%= link_to 'destroy', movie, :confirm => 'Are you sure?', :method => :delete %>
+          <% if current_user == User.find(1) %>
+            <%= link_to 'destroy', movie, :confirm => 'Are you sure?', :method => :delete %>
+          <% end %>
         <% end %>
       </td>
       

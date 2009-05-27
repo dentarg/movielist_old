@@ -161,12 +161,14 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.xml
   def destroy
-    @movie = Movie.find(params[:id])
-    @movie.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(movies_url) }
-      format.xml  { head :ok }
+    if current_user == User.find(1)
+      @movie = Movie.find(params[:id])
+      @movie.destroy
+      
+      respond_to do |format|
+        format.html { redirect_to(movies_url) }
+        format.xml  { head :ok }
+      end
     end
   end
 end
