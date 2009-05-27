@@ -12,6 +12,6 @@ staging:
   admin_email: bort@bort.com  
   
 production:
-  site_url: http://movies.starkast.net
+  site_url: http://movielist.starkast.net
   site_name: movielist
   admin_email: patrik@starkast.net
