@@ -1,0 +1,21 @@
+<%= title 'edit profile' %>
+
+<% form_for(@user) do |f| %>
+  <%= f.error_messages %>
+
+  <p><%= f.label :first_name %></p>
+  <p><%= f.text_field :first_name, :class => "text" %></p>
+  
+  <p><%= f.label :last_name %></p>
+  <p><%= f.text_field :last_name, :class => "text" %></p>
+  
+  <p><%= f.label :tumblr_username %></p>
+  <p><%= f.text_field :tumblr_username, :class => "text" %></p>
+  
+  <p><%= f.label :tumblr_password %></p>
+  <p><%= f.password_field :tumblr_password, :class => "text" %></p>
+  
+  <p>
+    <%= f.submit "Update", :class => "submit" %>
+  </p>
+<% end %>

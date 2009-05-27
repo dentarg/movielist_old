@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  tumblr_post_id: MyString
+  favorite_id: 1
+  towatch_id: 1
+  seen_id: 1
+
+two:
+  user_id: 1
+  tumblr_post_id: MyString
+  favorite_id: 1
+  towatch_id: 1
+  seen_id: 1

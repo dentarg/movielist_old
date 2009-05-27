@@ -1,9 +1,39 @@
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => :create
+  skip_before_filter :verify_authenticity_token, :only => [:create, :show]
   
   def new
     @user = User.new
   end
+  
+  def show
+    @user             = User.find(params[:id])
+    @seen_count       = @user.seen.length
+    @towatch_count    = @user.towatch.length
+    @favorites_count  = @user.favorites.length
+    
+    @seen_rating      = @user.seen_imdb_rating
+    @towatch_rating   = @user.towatch_imdb_rating
+    @favorites_rating  = @user.favorite_imdb_rating
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+ 
+  def update
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'Your profile was successfully updated.'
+        format.html { redirect_to(@user) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end 
  
   def create
     logout_keeping_session!

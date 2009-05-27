@@ -61,7 +61,9 @@
     	  <div class="span-8 last">
     		  <div id="user-info">
     		  	<% if logged_in? %>
-    		  	  logged in as <%= current_user %>, <%= link_to 'logout', logout_path %>.
+    		  	  logged in as <%= link_to current_user, user_path(current_user) %>
+    		  	  (<%= link_to 'edit', edit_user_path(current_user) %>),
+    		  	  <%= link_to 'logout', logout_path %>.
     		  	<% else %>
     		  	  <%#= link_to 'log in', login_path %> <!-- or -->
     		  	  <%#= link_to 'sign up', signup_path %>

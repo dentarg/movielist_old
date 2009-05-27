@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090525181403) do
+ActiveRecord::Schema.define(:version => 20090526231341) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "movie_id"
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(:version => 20090525181403) do
     t.datetime "updated_at"
   end
 
+  create_table "tumblr_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "favorite_id"
+    t.integer  "towatch_id"
+    t.integer  "seen_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "tumblr_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
     t.string   "identity_url"
@@ -116,6 +126,10 @@ ActiveRecord::Schema.define(:version => 20090525181403) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "tumblr_username"
+    t.string   "tumblr_password"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

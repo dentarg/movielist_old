@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :identity_url
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :identity_url,
+    :first_name, :last_name, :tumblr_username, :tumblr_password
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -59,9 +60,33 @@ class User < ActiveRecord::Base
   def password_required?
     new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
   end
+
+
+  def has_tumblr?
+    self.tumblr_username && self.tumblr_password ? true : false
+  end
+
+  def seen_imdb_rating
+    movies = self.seen_movies
+    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+  end
+  
+  def towatch_imdb_rating
+    movies = self.towatch_movies
+    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+  end
+  
+  def favorite_imdb_rating
+    movies = self.favorite_movies
+    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+  end
   
   def to_s
     self.login
+  end
+  
+  def real_name
+    "#{self.first_name} #{self.last_name}"
   end
 
   # the magic star

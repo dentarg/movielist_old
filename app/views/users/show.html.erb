@@ -1,0 +1,33 @@
+<%= title @user %>
+
+<div class="span-16">
+
+  <h1><%= @user.real_name %></h1>
+  
+  <h3>
+    <strong><%= @seen_count %></strong> <%= link_to 'movies seen', user_seen_index_path(@user) %>
+    /
+    <strong><%= @seen_rating %></strong>
+  </h3>
+  
+  <h3>
+    <strong><%= @favorites_count %></strong> <%= link_to 'favorite movies', user_favorites_path(@user) %>
+    /
+    <strong><%= @favorites_rating %></strong>
+  </h3>
+  
+  <h3>
+    <strong><%= @towatch_count %></strong> <%= link_to 'movies to watch', user_towatch_index_path(@user) %>
+    /
+    <strong><%= @towatch_rating %></strong>
+  </h3>
+
+</div>
+
+<div class="span-7 last">
+  
+</div>
+
+<div class="span-24">
+
+</div>
