@@ -79,7 +79,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.xml
   def index
-    @movies = Movie.find(:all)
+    @movies = Movie.find(:all, :order => 'title ASC' )
 
     respond_to do |format|
       format.html # index.html.erb
