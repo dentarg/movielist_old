@@ -2,8 +2,9 @@
 #	Application
 #############################################################
 
-set :application, "bort"
-set :deploy_to, "/path/to/deploy"
+set :application, "movielist"
+set :deploy_to, "/home/dentarg/www/movielist"
+set :shared_path, "#{deploy_to}/shared"
 
 #############################################################
 #	Settings
@@ -19,8 +20,8 @@ set :rails_env, "production"
 #	Servers
 #############################################################
 
-set :user, "bort"
-set :domain, "www.example.com"
+set :user, "dentarg"
+set :domain, "beaver.starkast.net"
 server domain, :app, :web
 role :db, domain, :primary => true
 
@@ -29,42 +30,21 @@ role :db, domain, :primary => true
 #############################################################
 
 set :scm, :git
-set :branch, "master"
-set :scm_user, 'bort'
-set :scm_passphrase, "PASSWORD"
-set :repository, "git@github.com:FudgeStudios/bort.git"
+set :branch, "production"
+set :repository, "git@github.com:dentarg/movielist.git"
 set :deploy_via, :remote_cache
+set :git_shallow_clone, 1
+set :git_enable_submodules, 1
+set :keep_releases, 5
 
 #############################################################
 #	Passenger
 #############################################################
 
 namespace :deploy do
-  desc "Create the database yaml file"
-  task :after_update_code do
-    db_config = <<-EOF
-    production:    
-      adapter: mysql
-      encoding: utf8
-      username: root
-      password: 
-      database: bort_production
-      host: localhost
-    EOF
-    
-    put db_config, "#{release_path}/config/database.yml"
-    
-    #########################################################
-    # Uncomment the following to symlink an uploads directory.
-    # Just change the paths to whatever you need.
-    #########################################################
-    
-    # desc "Symlink the upload directories"
-    # task :before_symlink do
-    #   run "mkdir -p #{shared_path}/uploads"
-    #   run "ln -s #{shared_path}/uploads #{release_path}/public/uploads"
-    # end
-  
+  desc "Link in uploaded stuff"
+  task :relink_shared_directories, :roles => :app do
+    run "ln -fs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
   end
     
   # Restart passenger on deploy
