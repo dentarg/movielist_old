@@ -68,17 +68,23 @@ class User < ActiveRecord::Base
 
   def seen_imdb_rating
     movies = self.seen_movies
-    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    unless movies.empty?
+      "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    end
   end
   
   def towatch_imdb_rating
     movies = self.towatch_movies
-    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    unless movies.empty?
+      "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    end
   end
   
   def favorite_imdb_rating
     movies = self.favorite_movies
-    "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    unless movies.empty?
+      "%0.1f" % (movies.collect { |m| m.imdb_rating.to_f }.inject() { |sum,element| sum+element } / movies.length)
+    end
   end
   
   def to_s
