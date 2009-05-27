@@ -1,0 +1,16 @@
+<%= title "Change Your Password" %>
+
+<% form_for :user, :url => { :action => 'update' } do |f| %>
+  <%= f.error_messages %>
+  <p class="preamble">Please enter a new password and confirm it.</p>
+
+  <p><%= f.label :password %></p>
+  <p><%= f.password_field :password, :class => "text" %></p>
+
+  <p><%= f.label :password_confirmation %></p>
+  <p><%= f.password_field :password_confirmation, :class => "text" %></p>
+
+	<div class="buttons">
+    <p><%= f.submit "Submit", :class => "submit" %></p>
+	</div>
+<% end %>
