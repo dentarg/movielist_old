@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
 
   def has_tumblr?
-    self.tumblr_username && self.tumblr_password ? true : false
+    !self.tumblr_username.empty? && !self.tumblr_password.empty? ? true : false
   end
 
   def seen_imdb_rating
