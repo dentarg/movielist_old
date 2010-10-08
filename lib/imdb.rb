@@ -20,29 +20,11 @@ class IMDB
   end
   
   def rating
-      rating_text = (@hp/"div.meta/b").inner_text
+      rating_text = (@hp/"span.rating-rating").inner_text
       if rating_text =~ /([\d\.]+)\/10/
         @rating = $1
       end
       @rating
-  end
-  
-  def extrainfo
-   if @extrainfo == nil #don't do it twice
-      @extrainfo = {} #init our hash
-      (@hp/"div.info").each do |inf| #go through each info div
-        title = inf/"h5" #the type of infobox is stored in h5
-        if title.any? #if we found one , we got data
-          body = inf.inner_text
-          body = body.gsub(/\n/,'') #remove newlines
-          if body =~ /\:(.+)/ #extract body from our text
-            body = $1
-          end
-          @extrainfo[title.inner_text.gsub(/[:\s]/,'').downcase] = body #store the body
-        end
-      end
-    end
-      @extrainfo
   end
   
   def reset
